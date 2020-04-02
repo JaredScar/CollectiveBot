@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="JDA-3.8.3_463-withDependencies">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/Downloads/JDA-3.8.3_463-withDependencies.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/spigot.1.8.8.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/Downloads/spigot.1.8.8.jar!/" />
+    </SOURCES>
+  </library>
+</component>

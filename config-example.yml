@@ -1,0 +1,27 @@
+#######################
+###  CollectiveBot  ###
+###       by        ###
+###     Badger      ###
+#######################
+BotToken: ''
+Enables:
+  SuggestionsAddon: true
+  WelcomeMessage: true
+SuggestionAcceptEmoji: ':YesEmoji:'
+SuggestionDenyEmoji: ':NoEmoji:'
+SuggestionApprovedEmoji: ':ApprovedEmoji:'
+SuggestionDeniedEmoji: ':DeniedEmoji:'
+SuggestionChannels:
+  - '693985384907931719'
+SuggestionDeniedChannel: '695294976908722229'
+SuggestionApprovedChannel: '695294976908722229'
+SuggestionRoles: # These are the roles that are allowed to approve and/or deny suggestions
+  - '693833282240118794'
+
+WelcomeMessage:
+  Title: 'Welcome {USER-TAG} to Project Badger'
+  TitleLink: ''
+  Description: "You're member #{MEMBER-COUNT} :tada:"
+  Footer: 'CollectiveBot by Badger'
+  FooterIMG: 'https://i.gyazo.com/981a86c82860fc5ae5859bcd1bb0df09.gif'
+  Thumbnail: '{USER-AVATAR}'
