@@ -21,7 +21,9 @@ SuggestionRoles: # These are the roles that are allowed to approve and/or deny s
 WelcomeMessage:
   Title: 'Welcome {USER-TAG} to Project Badger'
   TitleLink: ''
-  Description: "You're member #{MEMBER-COUNT} :tada:"
+  Description: "**You're member #{MEMBER-COUNT} :tada:**"
   Footer: 'CollectiveBot by Badger'
   FooterIMG: 'https://i.gyazo.com/981a86c82860fc5ae5859bcd1bb0df09.gif'
   Thumbnail: '{USER-AVATAR}'
+  Channel: '693836887651254283'
+  Color: '0 254 0'

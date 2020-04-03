@@ -35,7 +35,7 @@ public class Main {
                     jda.getPresence().setPresence(Game.of(Game.GameType.DEFAULT, "https://github.com/thewolfbadger"), true);
                     displayStatus = 0;
                 }
-                jda.getSelfUser().getManager().setName("CollectiveBot").submit();
+                //jda.getSelfUser().getManager().setName("CollectiveBot").submit();
             }
         }, 0L, 1000*60*10L); // updates every 10 minutes
     }
