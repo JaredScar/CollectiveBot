@@ -1,8 +1,10 @@
 package store.badger.collectivebot.main;
 
-import net.dv8tion.jda.core.JDA;
-import net.dv8tion.jda.core.JDABuilder;
-import net.dv8tion.jda.core.entities.Game;
+import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.JDABuilder;
+import net.dv8tion.jda.api.entities.Activity;
+import net.dv8tion.jda.api.requests.GatewayIntent;
+import net.dv8tion.jda.api.utils.ChunkingFilter;
 import org.bukkit.configuration.file.YamlConfiguration;
 import store.badger.collectivebot.listeners.MentionedListener;
 import store.badger.collectivebot.listeners.SuggestionListener;
@@ -17,9 +19,16 @@ public class Main {
     private static JDA jda;
     public static void main(String[] args) throws LoginException {
         String token = getCon().getString("BotToken");
-        JDA jdaa = new JDABuilder(token).addEventListener(new MentionedListener())
-                .addEventListener(new WelcomeListener())
-                .addEventListener(new SuggestionListener())
+        JDA jdaa = JDABuilder.createDefault(token).addEventListeners(
+                new MentionedListener(),
+                new WelcomeListener(),
+                new SuggestionListener()
+        ).setChunkingFilter(ChunkingFilter.ALL).enableIntents(
+                GatewayIntent.GUILD_MESSAGES,
+                GatewayIntent.GUILD_MEMBERS,
+                GatewayIntent.GUILD_MESSAGE_REACTIONS,
+                GatewayIntent.GUILD_EMOJIS
+        )
                 .build();
         System.out.println("BOT IS RUNNING");
         jda = jdaa;
@@ -29,10 +38,10 @@ public class Main {
             @Override
             public void run() {
                 if (displayStatus == 0) {
-                    jda.getPresence().setPresence(Game.of(Game.GameType.DEFAULT,"https://docs.badger.store"), true);
+                    jda.getPresence().setPresence(Activity.of(Activity.ActivityType.CUSTOM_STATUS,"https://docs.badger.store"), true);
                     displayStatus = 1;
                 } else {
-                    jda.getPresence().setPresence(Game.of(Game.GameType.DEFAULT, "https://github.com/thewolfbadger"), true);
+                    jda.getPresence().setPresence(Activity.of(Activity.ActivityType.CUSTOM_STATUS, "https://github.com/jaredscar"), true);
                     displayStatus = 0;
                 }
                 //jda.getSelfUser().getManager().setName("CollectiveBot").submit();

@@ -1,9 +1,9 @@
 package store.badger.collectivebot.listeners;
 
-import net.dv8tion.jda.core.entities.ChannelType;
-import net.dv8tion.jda.core.entities.Member;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
-import net.dv8tion.jda.core.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.entities.ChannelType;
+import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import store.badger.collectivebot.api.API;
 import store.badger.collectivebot.main.Main;
 
@@ -14,7 +14,9 @@ public class MentionedListener extends ListenerAdapter {
             for (Member mentioned : evt.getMessage().getMentionedMembers()) {
                 if (mentioned.getUser().getAsMention().equals(Main.getJDA().getSelfUser().getAsMention())) {
                     // They mentioned the bot
-                    evt.getTextChannel().sendMessage(API.getInformationMessage(evt.getMember()).build()).submit();
+                    if (evt.getMember() != null) {
+                        evt.getTextChannel().sendMessage(API.getInformationMessage(evt.getMember()).build()).submit();
+                    }
                 }
             }
         }

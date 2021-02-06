@@ -1,10 +1,10 @@
 package store.badger.collectivebot.listeners;
 
-import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.entities.*;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
-import net.dv8tion.jda.core.events.message.guild.react.GuildMessageReactionAddEvent;
-import net.dv8tion.jda.core.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.*;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
+import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.bukkit.configuration.file.YamlConfiguration;
 import store.badger.collectivebot.main.Main;
 
@@ -44,8 +44,6 @@ public class SuggestionListener extends ListenerAdapter {
         String suggestionApprovedEmoji = config.getString("SuggestionApprovedEmoji").replaceAll(":", "");
         String suggestionApprovedChan = config.getString("SuggestionApprovedChannel");
         String suggestionDeniedChan = config.getString("SuggestionDeniedChannel");
-        TextChannel approved = evt.getGuild().getTextChannelById(suggestionApprovedChan);
-        TextChannel denied = evt.getGuild().getTextChannelById(suggestionDeniedChan);
         List<String> suggestionChans = config.getStringList("SuggestionChannels");
         for (String sugChanID : suggestionChans) {
             if (chanID.equals(sugChanID)) {
@@ -62,16 +60,16 @@ public class SuggestionListener extends ListenerAdapter {
                     if(evt.getReactionEmote().getEmote().getName().equals(suggestionApprovedEmoji)) {
                         // Approved
                         try {
-                            String msg = evt.getChannel().getMessageById(
+                            String msg = evt.getChannel().retrieveMessageById(
                                     evt.getMessageId()).submit().get().getContentRaw();
-                            EmbedBuilder suggest = getSuggestionRes(Color.GREEN, msg, evt.getChannel().getMessageById(
+                            EmbedBuilder suggest = getSuggestionRes(Color.GREEN, msg, evt.getChannel().retrieveMessageById(
                                     evt.getMessageId()).submit().get(), evt.getMember(), true);
                             evt.getGuild().getTextChannelById(suggestionApprovedChan).sendMessage(suggest.build()).submit();
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
                         try {
-                            evt.getChannel().getMessageById(evt.getMessageId()).submit().get().delete().submit();
+                            evt.getChannel().retrieveMessageById(evt.getMessageId()).submit().get().delete().submit();
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -79,16 +77,16 @@ public class SuggestionListener extends ListenerAdapter {
                         if(evt.getReactionEmote().getEmote().getName().equals(suggestionDeniedEmoji)) {
                             // Denied
                             try {
-                                String msg = evt.getChannel().getMessageById(
+                                String msg = evt.getChannel().retrieveMessageById(
                                         evt.getMessageId()).submit().get().getContentRaw();
-                                EmbedBuilder suggest = getSuggestionRes(Color.RED, msg, evt.getChannel().getMessageById(
+                                EmbedBuilder suggest = getSuggestionRes(Color.RED, msg, evt.getChannel().retrieveMessageById(
                                         evt.getMessageId()).submit().get(), evt.getMember(), false);
                                 evt.getGuild().getTextChannelById(suggestionDeniedChan).sendMessage(suggest.build()).submit();
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
                             try {
-                                evt.getChannel().getMessageById(evt.getMessageId()).submit().get().delete().submit();
+                                evt.getChannel().retrieveMessageById(evt.getMessageId()).submit().get().delete().submit();
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
