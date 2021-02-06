@@ -27,7 +27,8 @@ public class Main {
                 GatewayIntent.GUILD_MESSAGES,
                 GatewayIntent.GUILD_MEMBERS,
                 GatewayIntent.GUILD_MESSAGE_REACTIONS,
-                GatewayIntent.GUILD_EMOJIS
+                GatewayIntent.GUILD_EMOJIS,
+                GatewayIntent.GUILD_PRESENCES
         )
                 .build();
         System.out.println("BOT IS RUNNING");
@@ -38,10 +39,10 @@ public class Main {
             @Override
             public void run() {
                 if (displayStatus == 0) {
-                    jda.getPresence().setPresence(Activity.of(Activity.ActivityType.CUSTOM_STATUS,"https://docs.badger.store"), true);
+                    jda.getPresence().setPresence(Activity.playing("https://docs.badger.store"), true);
                     displayStatus = 1;
                 } else {
-                    jda.getPresence().setPresence(Activity.of(Activity.ActivityType.CUSTOM_STATUS, "https://github.com/jaredscar"), true);
+                    jda.getPresence().setPresence(Activity.playing( "https://github.com/jaredscar"), true);
                     displayStatus = 0;
                 }
                 //jda.getSelfUser().getManager().setName("CollectiveBot").submit();
