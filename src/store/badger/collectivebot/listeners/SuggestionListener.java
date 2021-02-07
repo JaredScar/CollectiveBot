@@ -64,6 +64,8 @@ public class SuggestionListener extends ListenerAdapter {
                                     evt.getMessageId()).submit().get().getContentRaw();
                             EmbedBuilder suggest = getSuggestionRes(Color.GREEN, msg, evt.getChannel().retrieveMessageById(
                                     evt.getMessageId()).submit().get(), evt.getMember(), true);
+                            evt.getGuild().getTextChannelById(suggestionApprovedChan).sendMessage(evt.getChannel().retrieveMessageById(
+                                    evt.getMessageId()).submit().get().getAuthor().getAsMention()).submit();
                             evt.getGuild().getTextChannelById(suggestionApprovedChan).sendMessage(suggest.build()).submit();
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -81,6 +83,8 @@ public class SuggestionListener extends ListenerAdapter {
                                         evt.getMessageId()).submit().get().getContentRaw();
                                 EmbedBuilder suggest = getSuggestionRes(Color.RED, msg, evt.getChannel().retrieveMessageById(
                                         evt.getMessageId()).submit().get(), evt.getMember(), false);
+                                evt.getGuild().getTextChannelById(suggestionDeniedChan).sendMessage(evt.getChannel().retrieveMessageById(
+                                        evt.getMessageId()).submit().get().getAuthor().getAsMention()).submit();
                                 evt.getGuild().getTextChannelById(suggestionDeniedChan).sendMessage(suggest.build()).submit();
                             } catch (Exception e) {
                                 e.printStackTrace();
