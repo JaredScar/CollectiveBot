@@ -104,6 +104,7 @@ public class SuggestionListener extends ListenerAdapter {
         String suggestionDenyEmoji = config.getString("SuggestionDenyEmoji").replaceAll(":", "");
         int acceptCount = -1;
         int denyCount = -1;
+        String author = msg.getAuthor().getAsTag();
         for (MessageReaction react : msg.getReactions()) {
             if (react.getReactionEmote().getEmote().getName().equals(suggestionAcceptEmoji)) {
                 acceptCount = react.getCount() - 1;
@@ -118,8 +119,9 @@ public class SuggestionListener extends ListenerAdapter {
             embedb.addField("", "", false);
             embedb.addField("**__Suggestion__**", suggestion, false);
             embedb.addField("", "", false);
-            embedb.addField("**__Statistics__**", ":" + suggestionAcceptEmoji + ":" + " " + acceptCount + " had accepted this suggestion\n"
-                    + ":" + suggestionDenyEmoji + ":" + " " + denyCount + " had denied this suggestion", false);
+            embedb.addField("**__Statistics__**", "Suggested by " + author + "\n" + ""
+                    + " " + acceptCount + " had accepted this suggestion\n"
+                    + denyCount + " had denied this suggestion", false);
             embedb.setColor(color);
             embedb.setThumbnail("https://i.gyazo.com/ac24171c31f5dca015914908e190de29.png");
         } else {
@@ -129,8 +131,8 @@ public class SuggestionListener extends ListenerAdapter {
             embedb.addField("", "", false);
             embedb.addField("**__Suggestion__**", suggestion, false);
             embedb.addField("", "", false);
-            embedb.addField("**__Statistics__**", ":" + suggestionDenyEmoji + ":" + " " + denyCount + " had denied this suggestion\n"
-                    + ":" + suggestionAcceptEmoji + ":" + " " + acceptCount + " had accepted this suggestion", false);
+            embedb.addField("**__Statistics__**",  "Suggested by " + author + "\n" + denyCount + " had denied this suggestion\n"
+                    + acceptCount + " had accepted this suggestion", false);
             embedb.setColor(color);
             embedb.setThumbnail("https://i.gyazo.com/ac24171c31f5dca015914908e190de29.png");
         }
